@@ -1,0 +1,18 @@
+{
+  "name": "MK.Pool",
+  "rootNamespace": "MK.Pool",
+  "references": [
+    "UniTask",
+    "MK.AssetsManager",
+    "MK.Log"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}
