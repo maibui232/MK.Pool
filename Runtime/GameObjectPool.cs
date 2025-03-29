@@ -4,7 +4,7 @@ namespace MK.Pool
     using System.Collections.Generic;
     using UnityEngine;
 
-    public class GameObjectPool : MonoBehaviour, IPool<GameObject>
+    internal class GameObjectPool : MonoBehaviour
     {
         private GameObject cachedOriginal;
 
