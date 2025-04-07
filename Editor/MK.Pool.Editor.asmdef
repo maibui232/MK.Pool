@@ -1,3 +1,7 @@
 {
-  "name": "MK.Pool.Editor"
+  "name": "MK.Pool.Editor",
+  "rootNamespace": "MK.Pool.Editor",
+  "includePlatforms": [
+    "Editor"
+  ]
 }
