@@ -4,7 +4,8 @@
   "references": [
     "UniTask",
     "MK.AssetsManager",
-    "MK.Log"
+    "MK.Log",
+    "MK.DependencyInjection"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],

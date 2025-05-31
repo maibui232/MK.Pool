@@ -26,7 +26,6 @@ namespace MK.Pool
         void Cleanup<T>() where T : Component;
         void Cleanup<T>(T       original) where T : Component;
         void Cleanup(GameObject original);
-
-        void Cleanup(string key);
+        void Cleanup(string     key);
     }
 }
