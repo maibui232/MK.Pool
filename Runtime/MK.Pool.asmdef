@@ -5,7 +5,6 @@
     "UniTask",
     "MK.AssetsManager",
     "MK.Log",
-    "MK.DependencyInjection",
     "MK.Kernel"
   ],
   "includePlatforms": [],
