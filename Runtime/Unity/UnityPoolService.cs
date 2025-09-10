@@ -10,7 +10,7 @@ namespace MK.Pool
     using ILogger = MK.Log.ILogger;
     using Object = UnityEngine.Object;
 
-    internal class UnityPoolService : IUnityPoolService
+    internal sealed class UnityPoolService : IUnityPoolService
     {
         private readonly IAssetsManager assetsManager;
         private readonly ILogger        logger;

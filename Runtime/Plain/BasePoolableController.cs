@@ -12,11 +12,11 @@ namespace MK.Pool
 
 #region IPoolableController
 
-        IEnumerable<T> IPoolableController<T>.GetCached => this.elementCached;
+        public IReadOnlyCollection<T> GetCached => this.elementCached;
 
-        IEnumerable<T> IPoolableController<T>.GetSpawned => this.elementSpawned;
+        public IReadOnlyCollection<T> GetSpawned => this.elementSpawned;
 
-        T IPoolableController<T>.Instantiate()
+        public T Instantiate()
         {
             T element;
             if (this.elementCached.Count > 0)
@@ -32,10 +32,12 @@ namespace MK.Pool
             this.elementSpawned.Add(element);
             element.OnSpawn();
 
+            PoolStatistics.TrackSpawned(element);
+
             return element;
         }
 
-        void IPoolableController<T>.Recycle(T instance)
+        public void Recycle(T instance)
         {
             if (!this.elementSpawned.Remove(instance))
             {
@@ -44,12 +46,14 @@ namespace MK.Pool
 
             this.elementCached.Add(instance);
             instance.OnRecycle();
+            PoolStatistics.TrackRecycled(instance);
         }
 
-        void IPoolableController<T>.CleanUp()
+        public void CleanUp()
         {
             this.elementSpawned.Clear();
             this.elementCached.Clear();
+            PoolStatistics.CleanUp<T>();
         }
 
 #endregion

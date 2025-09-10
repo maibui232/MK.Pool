@@ -4,8 +4,8 @@ namespace MK.Pool
 
     public interface IPoolableController<T> where T : class, IPoolable
     {
-        IEnumerable<T> GetCached  { get; }
-        IEnumerable<T> GetSpawned { get; }
+        IReadOnlyCollection<T> GetCached  { get; }
+        IReadOnlyCollection<T> GetSpawned { get; }
 
         T    Instantiate();
         void Recycle(T obj);

@@ -4,7 +4,7 @@ namespace MK.Pool
     using System.Collections.Generic;
     using UnityEngine;
 
-    internal class GameObjectPool : MonoBehaviour
+    internal sealed class GameObjectPool : MonoBehaviour
     {
         private GameObject cachedOriginal;
 
@@ -29,21 +29,22 @@ namespace MK.Pool
 
         public GameObject Spawn()
         {
-            GameObject obj;
+            GameObject element;
             if (this.inactiveObjects.Count > 0)
             {
-                obj = this.inactiveObjects[0];
+                element = this.inactiveObjects[0];
                 this.inactiveObjects.RemoveAt(0);
             }
             else
             {
-                obj = Instantiate(this.cachedOriginal);
+                element = Instantiate(this.cachedOriginal);
             }
 
-            obj.SetActive(true);
-            this.activeObjects.Add(obj);
+            element.SetActive(true);
+            this.activeObjects.Add(element);
+            PoolStatistics.TrackSpawnedGameObject(this.cachedOriginal, element);
 
-            return obj;
+            return element;
         }
 
         public void Recycle(GameObject element)
@@ -55,6 +56,7 @@ namespace MK.Pool
 
             this.inactiveObjects.Add(element);
             element.SetActive(false);
+            PoolStatistics.TrackRecycledGameObject(this.cachedOriginal, element);
         }
 
         public void Cleanup()
@@ -73,6 +75,7 @@ namespace MK.Pool
 
             this.inactiveObjects.Clear();
             this.activeObjects.Clear();
+            PoolStatistics.CleanUpGameObjectPool(this.cachedOriginal);
         }
     }
 }

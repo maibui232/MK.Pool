@@ -1,6 +1,9 @@
 {
   "name": "MK.Pool.Editor",
   "rootNamespace": "MK.Pool.Editor",
+  "references": [
+    "MK.Pool"
+  ],
   "includePlatforms": [
     "Editor"
   ]
