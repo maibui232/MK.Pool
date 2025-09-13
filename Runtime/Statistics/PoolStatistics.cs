@@ -8,7 +8,7 @@ namespace MK.Pool
     public static class PoolStatistics
     {
 #if UNITY_EDITOR
-        public static readonly Dictionary<Type, (HashSet<IPoolable> cached, HashSet<IPoolable> spawned)>         TypeToPool   = new();
+        public static readonly Dictionary<Type, (HashSet<IRecyclable> cached, HashSet<IRecyclable> spawned)>     TypeToPool   = new();
         public static readonly Dictionary<GameObject, (HashSet<GameObject> cached, HashSet<GameObject> spawned)> PrefabToPool = new();
 
         public static event Action OnSpawned;
@@ -30,18 +30,18 @@ namespace MK.Pool
 #endif
 
 #if UNITY_EDITOR
-        private static (HashSet<IPoolable> cached, HashSet<IPoolable> spawned) GetPool(Type type)
+        private static (HashSet<IRecyclable> cached, HashSet<IRecyclable> spawned) GetPool(Type type)
         {
             if (!TypeToPool.TryGetValue(type, out var pool))
             {
-                TypeToPool[type] = pool = (new HashSet<IPoolable>(), new HashSet<IPoolable>());
+                TypeToPool[type] = pool = (new HashSet<IRecyclable>(), new HashSet<IRecyclable>());
             }
 
             return pool;
         }
 #endif
 
-        internal static void TrackSpawned<T>(T item) where T : IPoolable
+        internal static void TrackSpawned<T>(T item) where T : IRecyclable
         {
 #if UNITY_EDITOR
             var (cached, spawned) = GetPool(typeof(T));
@@ -51,7 +51,7 @@ namespace MK.Pool
 #endif
         }
 
-        internal static void TrackRecycled<T>(T item) where T : IPoolable
+        internal static void TrackRecycled<T>(T item) where T : IRecyclable
         {
 #if UNITY_EDITOR
             var (cached, spawned) = GetPool(typeof(T));
